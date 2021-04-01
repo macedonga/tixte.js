@@ -1,37 +1,21 @@
-## Welcome to GitHub Pages
+<img src="https://tixte.com/static/media/logo_mark.d3b45ae2.png" width="150px">
 
-You can use the [editor on GitHub](https://github.com/macedonga/tixte.js/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+# tixte.js
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+A wrapper for the Tixte API
 
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+## Install the library
+```SH
+npm i tixte.js
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+## Documentation
+Initializing the client:
+```JS
+const tixte = require("tixte.js");
 
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/macedonga/tixte.js/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+const Client = new tixte({
+  api_key: "your-key-here",
+  upload_key: "your-key-here"
+});
+```
