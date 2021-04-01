@@ -1,0 +1,12 @@
+{
+  "name": "tixte.js",
+  "version": "1.0.0",
+  "description": "A wrapper for the Tixte API",
+  "main": "index.js",
+  "author": "Marco Ceccon <me@macedon.ga>",
+  "license": "GPLv3",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "form-data": "^4.0.0"
+  }
+}
