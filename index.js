@@ -100,7 +100,7 @@ class Client {
      * Fetches the user's authorized Oauth2 apps
      * @returns The user's authorized Oauth2 apps
      */
-    async getUserDomains() {
+    async getUserOauth2Apps() {
         if (!this.api_key) return new Error("No API key provided.");
 
         try {
