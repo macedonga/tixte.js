@@ -106,24 +106,6 @@ class Client {
     }
 
     /**
-     * Fetches the user's authorized Oauth2 apps
-     * @returns The user's authorized Oauth2 apps
-     */
-    async getUserOauth2Apps() {
-        try {
-            const res = await get("https://api.tixte.com/v1/user/authorized-applications", {
-                headers: {
-                    "Authorization": this.api_key
-                }
-            });
-
-            return res.data;
-        } catch (err) {
-            return err.response.data;
-        }
-    }
-
-    /**
      * Uploads an image
      * @param {Number} imagePath Path of the image to upload.
      * @param {Number} domain The domain to upload the image to.
