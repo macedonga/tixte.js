@@ -1,4 +1,4 @@
-const { get, post } = require("axios");
+const { get, post, delete: del } = require("axios");
 const FormData = require("form-data");
 const fs = require("fs");
 
@@ -156,7 +156,7 @@ class Client {
         if (!imageID || typeof (imageID) != "string") return new Error(`"${imageID}" is not a valid value for "imageID"`);
 
         try {
-            const res = await get(`ttps://api.tixte.com/v1/user/uploads/del/${imageID}?auth=${this.upload_key}`, {
+            const res = await del(`ttps://api.tixte.com/v1/user/uploads/${imageID}`, {
                 headers: {
                     "Authorization": this.upload_key
                 }
