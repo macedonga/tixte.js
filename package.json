@@ -4,6 +4,10 @@
   "description": "A wrapper for the Tixte API",
   "main": "index.js",
   "author": "Marco Ceccon <me@macedon.ga>",
+  "contributors": [
+    "Max <max@maxx.lol>",
+    "Milan Mehra <milanmdev@gmail.com>"
+  ],
   "license": "GPLv3",
   "dependencies": {
     "axios": "^0.21.1",
