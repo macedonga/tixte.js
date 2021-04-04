@@ -148,37 +148,6 @@ class Client {
     }
 
     /**
-     * Uploads an image
-     * @param {Number} imagePath Path of the image to upload.
-     * @param {Number} domain The domain to upload the image to.
-     * @returns Response data from API
-     */
-    async uploadImage(imagePath, domain) {
-        if (!imagePath || typeof (imagePath) != "string") return new Error(`"${imagePath}" is not a valid value for "imagePath"`);
-        if (!domain || typeof (domain) != "string") return new Error(`"${domain}" is not a valid value for "domain"`);
-
-        try {
-            let fd = new FormData()
-            let file = fs.createReadStream(imagePath, { encoding: 'base64' });
-            fd.append("file", file)
-
-            const res = await post("https://api.tixte.com/v1/upload", fd, {
-                headers: {
-                    "Authorization": this.upload_key,
-                    "domain": domain,
-                    "Content-Type": "multipart/form-data",
-                    ...fd.getHeaders()
-                },
-                data: fd
-            });
-
-            return res.data;
-        } catch (err) {
-            return err.response.data;
-        }
-    }
-
-    /**
      * Deletes an image
      * @param {String} imageID The ID of the image.
      * @returns Response data from API
