@@ -12,10 +12,9 @@ npm i tixte.js
 ## Documentation
 Initializing the client:
 ```JS
-const tixte = require("tixte.js");
+const Tixte = require("tixte.js");
 
-const Client = new tixte({
-  api_key: "your-key-here",
-  upload_key: "your-key-here"
+const client = new Tixte({
+  api_key: "your-key-here"
 });
 ```
