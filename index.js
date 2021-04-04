@@ -117,7 +117,7 @@ class Client {
 
         try {
             let fd = new FormData()
-            let file = fs.createReadStream(imagePath, { encoding: 'base64' });
+            let file = fs.createReadStream(imagePath);
             fd.append("file", file)
 
             const res = await post("https://api.tixte.com/v1/upload", fd, {
