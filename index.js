@@ -1,14 +1,12 @@
-const { get, post } = require("axios");
+const { get, post, delete: del } = require("axios");
 const FormData = require("form-data");
 const fs = require("fs");
 
 class Client {
     constructor(options) {
-        if (!options.upload_key) throw new Error('"upload_key" cannot be undefined');
+        if (!options.api_key) throw new Error('"api_key" cannot be undefined');
 
-        this.upload_key = options.upload_key;
-
-        if (options.api_key) this.api_key = options.api_key;
+        this.api_key = options.api_key;
     }
 
     /**
@@ -16,8 +14,6 @@ class Client {
      * @returns The size of the user's uploads.
      */
     async getSize() {
-        if (!this.api_key) return new Error("No API key provided.");
-
         try {
             const res = await get("https://api.tixte.com/v1/user/uploads/size", {
                 headers: {
@@ -38,8 +34,6 @@ class Client {
      * @returns 
      */
     async getUploads(amount, page) {
-        if (!this.api_key) return new Error("No API key provided.");
-
         try {
             if (!amount || typeof (amount) != "number") return new Error(`${amount} is not a valid value for "amount".`);
             if (!page || typeof (page) != "number") return new Error(`${page} is not a valid value for "page".`);
@@ -57,14 +51,31 @@ class Client {
     }
 
     /**
-     * Fetches user info.
+     * Fetches user info
      * @returns User's information
      */
     async getUserInfo() {
-        if (!this.api_key) return new Error("No API key provided.");
-
         try {
-            const res = await get("https://api.tixte.com/v1/auth/session", {
+            const res = await get("https://api.tixte.com/v1/users/@me", {
+                headers: {
+                    "Authorization": this.api_key
+                }
+            });
+
+            return res.data.data;
+        } catch (err) {
+            return err.response.data;
+        }
+    }
+
+    /**
+     * Fetches another user's info
+     * @param {String} user The username or user ID of the user
+     * @returns User's information
+     */
+    async getUserInfoByName(user) {
+        try {
+            const res = await get(`https://api.tixte.com/v1/users/${user}`, {
                 headers: {
                     "Authorization": this.api_key
                 }
@@ -81,30 +92,8 @@ class Client {
      * @returns The user's domains
      */
     async getUserDomains() {
-        if (!this.api_key) return new Error("No API key provided.");
-
         try {
             const res = await get("https://api.tixte.com/v1/user/domains", {
-                headers: {
-                    "Authorization": this.api_key
-                }
-            });
-
-            return res.data;
-        } catch (err) {
-            return err.response.data;
-        }
-    }
-
-    /**
-     * Fetches the user's authorized Oauth2 apps
-     * @returns The user's authorized Oauth2 apps
-     */
-    async getUserDomains() {
-        if (!this.api_key) return new Error("No API key provided.");
-
-        try {
-            const res = await get("https://api.tixte.com/v1/user/authorized-applications", {
                 headers: {
                     "Authorization": this.api_key
                 }
@@ -128,12 +117,12 @@ class Client {
 
         try {
             let fd = new FormData()
-            let file = fs.createReadStream(imagePath, { encoding: 'base64' });
+            let file = fs.createReadStream(imagePath);
             fd.append("file", file)
 
             const res = await post("https://api.tixte.com/v1/upload", fd, {
                 headers: {
-                    "Authorization": this.upload_key,
+                    "Authorization": this.api_key,
                     "domain": domain,
                     "Content-Type": "multipart/form-data",
                     ...fd.getHeaders()
@@ -156,9 +145,9 @@ class Client {
         if (!imageID || typeof (imageID) != "string") return new Error(`"${imageID}" is not a valid value for "imageID"`);
 
         try {
-            const res = await get(`ttps://api.tixte.com/v1/user/uploads/del/${imageID}?auth=${this.upload_key}`, {
+            const res = await del(`https://api.tixte.com/v1/user/uploads/${imageID}`, {
                 headers: {
-                    "Authorization": this.upload_key
+                    "Authorization": this.api_key
                 }
             });
 
