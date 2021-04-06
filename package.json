@@ -1,6 +1,6 @@
 {
   "name": "tixte.js",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A wrapper for the Tixte API",
   "main": "index.js",
   "repository": {
