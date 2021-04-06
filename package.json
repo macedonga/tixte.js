@@ -2,7 +2,7 @@
   "name": "tixte.js",
   "version": "1.0.0",
   "description": "A wrapper for the Tixte API",
-  "main": "index.js",.
+  "main": "index.js",
   "repository": {
       "type": "git",
       "url": "git+https://github.com/macedonga/tixte.js.git"
