@@ -15,7 +15,7 @@ class Client {
      */
     async getSize() {
         try {
-            const res = await get("https://api.tixte.com/v1/user/uploads/size", {
+            const res = await get("https://api.tixte.com/v1/users/@me/uploads/size", {
                 headers: {
                     "Authorization": this.api_key
                 }
@@ -31,14 +31,14 @@ class Client {
      * Returns the user's uploads
      * @param {Number} amount The amount of uploads to return.
      * @param {Number} page The page of the uploads.
-     * @returns 
+     * @returns
      */
     async getUploads(amount, page) {
         try {
             if (!amount || typeof (amount) != "number") return new Error(`${amount} is not a valid value for "amount".`);
             if (!page || typeof (page) != "number") return new Error(`${page} is not a valid value for "page".`);
 
-            const res = await get(`https://api.tixte.com/v1/user/uploads?page=${page}&amount=${amount}`, {
+            const res = await get(`https://api.tixte.com/v1/users/@me/uploads?page=${page}&amount=${amount}`, {
                 headers: {
                     "Authorization": this.api_key
                 }
@@ -89,11 +89,12 @@ class Client {
 
     /**
      * Fetches the user's domains
+     * @param {String} token Token from the Tixte cookie.
      * @returns The user's domains
      */
     async getUserDomains() {
         try {
-            const res = await get("https://api.tixte.com/v1/user/domains", {
+            const res = await get("https://api.tixte.com/v1/users/@me/domains", {
                 headers: {
                     "Authorization": this.api_key
                 }
@@ -145,7 +146,7 @@ class Client {
         if (!imageID || typeof (imageID) != "string") return new Error(`"${imageID}" is not a valid value for "imageID"`);
 
         try {
-            const res = await del(`https://api.tixte.com/v1/user/uploads/${imageID}`, {
+            const res = await del(`https://api.tixte.com/v1/users/@me/uploads/${imageID}`, {
                 headers: {
                     "Authorization": this.api_key
                 }
