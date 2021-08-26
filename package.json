@@ -1,13 +1,13 @@
 {
   "name": "tixte.js",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "description": "A wrapper for the Tixte API",
   "main": "index.js",
   "repository": {
       "type": "git",
       "url": "git+https://github.com/macedonga/tixte.js.git"
   },
-  "author": "Marco Ceccon <me@macedon.ga>",
+  "author": "Marco Ceccon <me@marco.win>",
   "contributors": [
     "Max <max@maxx.lol>",
     "Milan Mehra <milanmdev@gmail.com>"
