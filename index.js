@@ -14,17 +14,13 @@ class Client {
      * @returns The size of the user's uploads.
      */
     async getSize() {
-        try {
-            const res = await get("https://api.tixte.com/v1/users/@me/uploads/size", {
-                headers: {
-                    "Authorization": this.api_key
-                }
-            });
+        const res = await get("https://api.tixte.com/v1/users/@me/uploads/size", {
+            headers: {
+                "Authorization": this.api_key
+            }
+        });
 
-            return res.data;
-        } catch (err) {
-            return err.response.data;
-        }
+        return res.data;
     }
 
     /**
@@ -34,20 +30,16 @@ class Client {
      * @returns
      */
     async getUploads(amount, page) {
-        try {
-            if (!amount || typeof (amount) != "number") return new Error(`${amount} is not a valid value for "amount".`);
-            if (!page || typeof (page) != "number") return new Error(`${page} is not a valid value for "page".`);
+        if (!amount || typeof (amount) != "number") return new Error(`${amount} is not a valid value for "amount".`);
+        if (!page || typeof (page) != "number") return new Error(`${page} is not a valid value for "page".`);
 
-            const res = await get(`https://api.tixte.com/v1/users/@me/uploads?page=${page}&amount=${amount}`, {
-                headers: {
-                    "Authorization": this.api_key
-                }
-            });
+        const res = await get(`https://api.tixte.com/v1/users/@me/uploads?page=${page}&amount=${amount}`, {
+            headers: {
+                "Authorization": this.api_key
+            }
+        });
 
-            return res.data.data;
-        } catch (err) {
-            return err.response.data;
-        }
+        return res.data.data;
     }
 
     /**
@@ -55,17 +47,13 @@ class Client {
      * @returns User's information
      */
     async getUserInfo() {
-        try {
-            const res = await get("https://api.tixte.com/v1/users/@me", {
-                headers: {
-                    "Authorization": this.api_key
-                }
-            });
+        const res = await get("https://api.tixte.com/v1/users/@me", {
+            headers: {
+                "Authorization": this.api_key
+            }
+        });
 
-            return res.data.data;
-        } catch (err) {
-            return err.response.data;
-        }
+        return res.data.data;
     }
 
     /**
@@ -74,17 +62,13 @@ class Client {
      * @returns User's information
      */
     async getUserInfoByName(user) {
-        try {
-            const res = await get(`https://api.tixte.com/v1/users/${user}`, {
-                headers: {
-                    "Authorization": this.api_key
-                }
-            });
+        const res = await get(`https://api.tixte.com/v1/users/${user}`, {
+            headers: {
+                "Authorization": this.api_key
+            }
+        });
 
-            return res.data.data;
-        } catch (err) {
-            return err.response.data;
-        }
+        return res.data.data;
     }
 
     /**
@@ -93,17 +77,13 @@ class Client {
      * @returns The user's domains
      */
     async getUserDomains() {
-        try {
-            const res = await get("https://api.tixte.com/v1/users/@me/domains", {
-                headers: {
-                    "Authorization": this.api_key
-                }
-            });
+        const res = await get("https://api.tixte.com/v1/users/@me/domains", {
+            headers: {
+                "Authorization": this.api_key
+            }
+        });
 
-            return res.data;
-        } catch (err) {
-            return err.response.data;
-        }
+        return res.data;
     }
 
     /**
@@ -116,25 +96,21 @@ class Client {
         if (!imagePath || typeof (imagePath) != "string") return new Error(`"${imagePath}" is not a valid value for "imagePath"`);
         if (!domain || typeof (domain) != "string") return new Error(`"${domain}" is not a valid value for "domain"`);
 
-        try {
-            let fd = new FormData()
-            let file = fs.createReadStream(imagePath);
-            fd.append("file", file)
+        let fd = new FormData()
+        let file = fs.createReadStream(imagePath);
+        fd.append("file", file)
 
-            const res = await post("https://api.tixte.com/v1/upload", fd, {
-                headers: {
-                    "Authorization": this.api_key,
-                    "domain": domain,
-                    "Content-Type": "multipart/form-data",
-                    ...fd.getHeaders()
-                },
-                data: fd
-            });
+        const res = await post("https://api.tixte.com/v1/upload", fd, {
+            headers: {
+                "Authorization": this.api_key,
+                "domain": domain,
+                "Content-Type": "multipart/form-data",
+                ...fd.getHeaders()
+            },
+            data: fd
+        });
 
-            return res.data;
-        } catch (err) {
-            return err.response.data;
-        }
+        return res.data;
     }
 
     /**
@@ -145,17 +121,13 @@ class Client {
     async deleteImage(imageID) {
         if (!imageID || typeof (imageID) != "string") return new Error(`"${imageID}" is not a valid value for "imageID"`);
 
-        try {
-            const res = await del(`https://api.tixte.com/v1/users/@me/uploads/${imageID}`, {
-                headers: {
-                    "Authorization": this.api_key
-                }
-            });
+         const res = await del(`https://api.tixte.com/v1/users/@me/uploads/${imageID}`, {
+            headers: {
+                "Authorization": this.api_key
+            }
+         });
 
-            return res.data;
-        } catch (err) {
-            return err.response.data;
-        }
+         return res.data;
     }
 }
 
